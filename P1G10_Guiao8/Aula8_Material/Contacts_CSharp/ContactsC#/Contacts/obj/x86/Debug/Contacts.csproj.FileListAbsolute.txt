@@ -1,0 +1,9 @@
+C:\Users\jcoel\Desktop\BD\P1G10_Guiao8\Aula8_Material\Contacts_CSharp\ContactsC#\Contacts\bin\Debug\Contacts.exe
+C:\Users\jcoel\Desktop\BD\P1G10_Guiao8\Aula8_Material\Contacts_CSharp\ContactsC#\Contacts\bin\Debug\Contacts.pdb
+C:\Users\jcoel\Desktop\BD\P1G10_Guiao8\Aula8_Material\Contacts_CSharp\ContactsC#\Contacts\obj\x86\Debug\Contacts.csprojAssemblyReference.cache
+C:\Users\jcoel\Desktop\BD\P1G10_Guiao8\Aula8_Material\Contacts_CSharp\ContactsC#\Contacts\obj\x86\Debug\Contacts.Form1.resources
+C:\Users\jcoel\Desktop\BD\P1G10_Guiao8\Aula8_Material\Contacts_CSharp\ContactsC#\Contacts\obj\x86\Debug\Contacts.Properties.Resources.resources
+C:\Users\jcoel\Desktop\BD\P1G10_Guiao8\Aula8_Material\Contacts_CSharp\ContactsC#\Contacts\obj\x86\Debug\Contacts.csproj.GenerateResource.cache
+C:\Users\jcoel\Desktop\BD\P1G10_Guiao8\Aula8_Material\Contacts_CSharp\ContactsC#\Contacts\obj\x86\Debug\Contacts.csproj.CoreCompileInputs.cache
+C:\Users\jcoel\Desktop\BD\P1G10_Guiao8\Aula8_Material\Contacts_CSharp\ContactsC#\Contacts\obj\x86\Debug\Contacts.exe
+C:\Users\jcoel\Desktop\BD\P1G10_Guiao8\Aula8_Material\Contacts_CSharp\ContactsC#\Contacts\obj\x86\Debug\Contacts.pdb

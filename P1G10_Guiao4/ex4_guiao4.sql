@@ -1,0 +1,63 @@
+
+CREATE SCHEMA  PRESCRIÇAO_MEDICAMENTOS
+go
+
+
+CREATE TABLE PRESCRIÇAO_MEDICAMENTOS.MEDICO (
+	n_medico		INT,
+	especialidade	VARCHAR(30),
+	nome			VARCHAR(30) NOT NULL,
+	PRIMARY KEY(n_medico)
+);
+
+CREATE TABLE PRESCRIÇAO_MEDICAMENTOS.PACIENTE (
+	n_utente			INT,
+	endereço			VARCHAR(30),
+	data_nascimento		DATE NOT NULL,
+	nome				VARCHAR(30) NOT NULL,
+	PRIMARY KEY(n_utente)
+);
+
+CREATE TABLE PRESCRIÇAO_MEDICAMENTOS.FARMACIA (
+	nome		VARCHAR(30) NOT NULL,
+	endereço	VARCHAR(30),
+	telefone	INT,
+	PRIMARY KEY(nome)
+);
+
+CREATE TABLE PRESCRIÇAO_MEDICAMENTOS.PRESCRIÇAO (
+	n_prescricao	INT,
+	n_medico		INT,
+	n_utente		INT,
+	data_presc		DATE NOT NULL,
+	nome_farmacia	VARCHAR(30),
+	PRIMARY KEY(n_prescricao),
+	FOREIGN KEY(n_medico) REFERENCES PRESCRIÇAO_MEDICAMENTOS.MEDICO(n_medico),
+	FOREIGN KEY(n_utente) REFERENCES PRESCRIÇAO_MEDICAMENTOS.PACIENTE(n_utente),
+	FOREIGN KEY(nome_farmacia) REFERENCES PRESCRIÇAO_MEDICAMENTOS.FARMACIA(nome)
+);
+
+CREATE TABLE PRESCRIÇAO_MEDICAMENTOS.FARMACEUTICA (
+	n_registo	INT,
+	nome		VARCHAR(30) NOT NULL,
+	endereco	VARCHAR(30) NOT NULL,
+	PRIMARY KEY(n_registo),
+);
+
+CREATE TABLE PRESCRIÇAO_MEDICAMENTOS.FARMACO (
+	formula			VARCHAR(30),
+	nome_comercial	INT NOT NULL,
+	n_registo_farm	INT,
+	PRIMARY KEY(n_registo_farm, nome_comercial),
+	FOREIGN KEY(nome_comercial) REFERENCES PRESCRIÇAO_MEDICAMENTOS.FARMACEUTICA(n_registo)
+);
+
+CREATE TABLE PRESCRIÇAO_MEDICAMENTOS.CONTEM (
+	n_prescricao	INT,
+	n_registo		INT,
+	nome_comercial	INT,
+	PRIMARY KEY(n_prescricao, n_registo, nome_comercial),
+	FOREIGN KEY(n_prescricao) REFERENCES PRESCRIÇAO_MEDICAMENTOS.PRESCRIÇAO(n_prescricao),
+	FOREIGN KEY(n_registo, nome_comercial) 
+	REFERENCES PRESCRIÇAO_MEDICAMENTOS.FARMACO(n_registo_farm, nome_comercial)
+);

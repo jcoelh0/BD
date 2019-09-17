@@ -1,0 +1,45 @@
+﻿Exercicio 5.1
+a)	π Pname, Fname, Minit, Lname, Ssn (project ⨝ Pnumber=Pno works_on ⨝ Essn=Ssn employee)
+
+b)	π Fname, Minit, Lname (π Fname, Minit, Lname, Super_ssn (employee) ⨝ Super_ssn=Ssn (πSsn (σ Fname='Carlos' and Minit='D' and Lname='Gomes' (employee))))
+
+c)	π Pname, totalhours (γ Pname; sum(Hours) -> totalhours (project ⨝ Pnumber=Pno works_on))
+
+d)	π Fname, Minit, Lname, Ssn (π Fname, Minit, Lname, Ssn (σ Dno=3 (employee)) ⨝ Ssn=works_on.Essn (πPno, Essn (σ Hours>20 (works_on)) ⨝ Pno=Pnumber π Pnumber (σ Pname='Aveiro Digital' (project))))
+
+e)	π Fname, Minit, Lname (σ Essn=null (π Fname, Minit, Lname, Ssn (employee) ⟕ Ssn=Essn works_on))
+
+f)	π Dname, avg_salary (γ Dname; avg(Salary) -> avg_salary (π Dnumber, Dname (department) ⨝ Dnumber=Dno π Salary, Dno (σ Sex='F' (employee)))) 
+
+g)	σ depend>2 (π Fname, Minit, Lname, depend (γ Ssn, Fname, Minit, Lname; Count(Ssn) -> depend (π Ssn, Fname, Minit, Lname (employee) ⨝ Ssn=Essn π Essn, Dependent_name (dependent))))
+
+h)	π Fname, Minit, Lname (π Mgr_ssn (department) ⨝ Mgr_ssn=Ssn σ Essn=null (π Ssn, Fname, Minit, Lname (employee) ⟕ Ssn=Essn π Essn, Dependent_name (dependent)))
+
+i)	X = π Fname, Minit, Lname, Address, Dno (σ Plocation='Aveiro' (employee ⨝ Ssn=Essn works_on ⨝ Pno=Pnumber project))
+	Y = π Dnumber (σ Dlocation!='Aveiro' (employee ⨝ Ssn=Essn works_on ⨝ Dno=Dnumber department ⨝ dept_location))
+	π Fname, Minit, Lname, Address ( X ⨝ Dno=Dnumber Y)
+
+
+Exercicio 5.2
+
+a)	π nome (fornecedor) - (π nome (fornecedor ⨝ nif=fornecedor (encomenda)))
+
+b)	π nome, codProd, media (produto ⨝ codigo=codProd (γ codProd; AVG(unidades)->media (item)))
+
+c)	γ numero; AVG(produto.unidades)-> media (encomenda ⨝ numEnc=numero (item) ⨝ codProd=codigo (produto))
+
+d)	π fornecedor.nome, produto.nome, produto.unidades (encomenda ⨝ fornecedor=nif (fornecedor) ⨝ numero=numEnc (item) ⨝ codProd=codigo (produto) )
+
+Exercicio 5.3
+
+a)	π nome (paciente) - (π nome (prescricao ⨝ paciente))
+
+b)	π especialidade, total ( γ especialidade; SUM(numPrescricoes)->total (medico ⨝ numSNS=numMedico (γ numMedico; COUNT(numPresc)-> numPrescricoes (prescricao))))
+
+c)	γ nome; COUNT(farmacia)->numPrescricoes (farmacia ⨝ farmacia=nome prescricao)
+
+d)	σ farmaco.numRegFarm=906 (π nome, numRegFarm (farmaco) - π nomeFarmaco, numRegFarm (presc_farmaco))
+
+e)	π farmacia, reg_count, nome ((γ numRegFarm, farmacia; COUNT(numRegFarm)-> reg_count (presc_farmaco ⨝ (σ dataProc ≠ null prescricao))) ⨝ (numRegFarm = numReg) farmaceutica)
+
+f)	π nome, paciente.numUtente (paciente ⨝ paciente.numUtente=prescricao.numUtente (prescricao))

@@ -1,0 +1,84 @@
+
+CREATE SCHEMA UNIVERSIDADE
+go
+
+CREATE TABLE UNIVERSIDADE.PROFESSOR (
+	n_mec				INT,
+	nome				VARCHAR(30),
+	area_cientifica		VARCHAR(30),
+	categ_profissional	VARCHAR(30),
+	data_nascim			DATE NOT NULL,
+	dep_nome			VARCHAR(30) NOT NULL,
+	dedicaçao			TINYINT,
+	PRIMARY KEY(n_mec),
+	CHECK(dedicaçao BETWEEN 1 and 100),
+	CHECK(n_mec >0)
+);
+
+CREATE TABLE UNIVERSIDADE.DEPARTAMENTO (
+	nome			VARCHAR(30),
+	localizaçao		VARCHAR(30) NOT NULL,
+	dirige_n_mec	INT NOT NULL,
+	PRIMARY KEY(nome),
+	FOREIGN KEY(dirige_n_mec) REFERENCES UNIVERSIDADE.PROFESSOR(n_mec)
+);
+
+ALTER TABLE UNIVERSIDADE.PROFESSOR 
+	ADD CONSTRAINT PROFDEPFK 
+		FOREIGN KEY(dep_nome) REFERENCES UNIVERSIDADE.DEPARTAMENTO(nome);
+
+CREATE TABLE UNIVERSIDADE.PROJETO (
+	referencia		INT,
+	nome			VARCHAR(30) NOT NULL,
+	orçamento		MONEY,
+	entidade		VARCHAR(30),
+	data_in			DATE NOT NULL,
+	data_fim		DATE,
+	gerente_n_mec	INT NOT NULL,
+	PRIMARY KEY(referencia),
+	CHECK(data_fim > data_in),
+	FOREIGN KEY(gerente_n_mec) REFERENCES UNIVERSIDADE.PROFESSOR(n_mec)
+);
+
+CREATE TABLE UNIVERSIDADE.GRAU (
+	tipo	VARCHAR(30),
+	PRIMARY KEY(tipo)
+);
+
+CREATE TABLE UNIVERSIDADE.ESTUDANTE (
+	n_mec		INT,
+	data_nasc	DATE NOT NULL,
+	nome		VARCHAR(30) NOT NULL,
+	nome_depart	VARCHAR(30) NOT NULL,
+	grau		VARCHAR(30) NOT NULL,
+	advisor		INT NOT NULL,
+	PRIMARY KEY(n_mec),
+	FOREIGN KEY(nome_depart) REFERENCES UNIVERSIDADE.DEPARTAMENTO(nome),
+	FOREIGN KEY(grau) REFERENCES UNIVERSIDADE.GRAU(tipo)
+);
+
+CREATE TABLE UNIVERSIDADE.PROF_PROJETO (
+	n_mec		INT,
+	project_ref	INT,
+	PRIMARY KEY(n_mec, project_ref),
+	FOREIGN KEY(project_ref) REFERENCES UNIVERSIDADE.PROJETO(referencia),
+	FOREIGN KEY(n_mec) REFERENCES UNIVERSIDADE.PROFESSOR(n_mec)
+);
+
+CREATE TABLE UNIVERSIDADE.ALUNO_PROJETO (
+	project_ref		INT,
+	aluno_n_mec		INT,
+	PRIMARY KEY(project_ref, aluno_n_mec),
+	FOREIGN KEY(project_ref) REFERENCES UNIVERSIDADE.PROJETO(referencia),
+	FOREIGN KEY(aluno_n_mec) REFERENCES UNIVERSIDADE.ESTUDANTE(n_mec)
+);
+
+CREATE TABLE UNIVERSIDADE.SUPERVISAO (
+	projeto_ref	INT,
+	aluno_n_mec	INT,
+	prof_n_mec	INT,
+	PRIMARY KEY(projeto_ref, aluno_n_mec, prof_n_mec),
+	FOREIGN KEY(projeto_ref) REFERENCES UNIVERSIDADE.PROJETO(referencia),
+	FOREIGN KEY(aluno_n_mec) REFERENCES UNIVERSIDADE.ESTUDANTE(n_mec),
+	FOREIGN KEY(prof_n_mec) REFERENCES UNIVERSIDADE.PROFESSOR(n_mec)
+);
